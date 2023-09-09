@@ -6,7 +6,36 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
 
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Example</title>
+    <style>
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+
+        .captcha-box {
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .captcha-input {
+            font-size: 24px;
+            padding: 5px;
+        }
+
+        .captcha-refresh {
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 
 
 
@@ -44,9 +73,43 @@
                   <textarea id="message" name="message" class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:bg-gray-900 focus:ring-2 focus:ring-indigo-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                 </div>
               </div>
+
+
+              <div class="captcha-container">
+                <div class="captcha-box" id="captchaBox"></div>
+                <input type="text" class="captcha-input" id="captchaInput" placeholder="Enter the CAPTCHA">
+                <div class="captcha-refresh" onclick="refreshCaptcha()">Refresh CAPTCHA</div>
+            </div>
+                
+
+            <script>
+                function generateCaptcha() {
+                    var captchaBox = document.getElementById("captchaBox");
+                    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                    var captchaText = "";
+                    for (var i = 0; i < 5; i++) {
+                        var randomChar = chars[Math.floor(Math.random() * chars.length)];
+                        captchaText += randomChar;
+                    }
+                    captchaBox.innerText = captchaText;
+                }
+        
+                function refreshCaptcha() {
+                    generateCaptcha();
+                }
+        
+                window.onload = function() {
+                    generateCaptcha();
+                };
+            </script>
+
+
               <div class="p-2 w-full">
                 <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</button>
               </div>
+
+
+              
               <div class="p-2 w-full pt-8 mt-8 border-t border-gray-800 text-center">
                 <a class="text-indigo-400">Sponsorify@gmail.com</a>
                 <p class="leading-normal my-5">Bhilai, CG
